@@ -55,9 +55,9 @@ class App extends Component {
   }
 
 
-  createTask(content) {
+  createTask(name, content, phase, priority) {
     this.setState({ loading: true })
-    this.state.todoList.methods.createTask(content).send({ from: this.state.account })
+    this.state.todoList.methods.createTask(name, content, phase, priority).send({ from: this.state.account })
       .once('receipt', (receipt) => {
         this.setState({ loading: false })
       })
@@ -75,17 +75,16 @@ class App extends Component {
   render() {
     return (
       <>
-
-        <div className="container">
-          <p>Your account: {this.state.account}</p>
-          <p>Task Count: {this.state.taskCount}</p>
-          {/* <small><a href="#"><span id="account"></span></a></small> */}
-
-
-        </div>
         <div className="container-fluid">
+
+
           <div className="row">
+            <p>Your account: {this.state.account}</p>
+            <p>Task Count: {this.state.taskCount}</p>
+            {/* <small><a href="#"><span id="account"></span></a></small> */}
+
             <main role="main" className="col-lg-12 d-flex justify-content-center">
+
               {this.state.loading
                 ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
                 : <TodoList
@@ -93,6 +92,7 @@ class App extends Component {
                   createTask={this.createTask}
                   toggleCompleted={this.toggleCompleted} />
               }
+
             </main>
           </div>
         </div>

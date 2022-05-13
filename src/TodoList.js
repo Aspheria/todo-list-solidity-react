@@ -22,8 +22,6 @@ class TodoList extends Component {
         </form>
         <ul id="taskList" className="list-unstyled">{this.props.tasks.map((task, key) => {
             return (
-
-
               <div className="taskTemplate" className="checkbox" key={key}>
                 <label>
                   <input type="checkbox" name={task.id }defaultChecked={task.completed}
