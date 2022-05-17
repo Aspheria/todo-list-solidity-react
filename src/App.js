@@ -1,3 +1,4 @@
+import { Container } from '@mui/system'
 import React, { Component } from 'react'
 import Web3 from 'web3'
 import './App.css'
@@ -21,7 +22,6 @@ class App extends Component {
     const todoList = new web3.eth.Contract(TODO_LIST_ABI, TODO_LIST_ADDRESS)
     console.log(todoList, 'todoList')
 
-
     this.setState({ todoList })
     const taskCount = await todoList.methods.taskCount().call()
     this.setState({ taskCount })
@@ -29,11 +29,11 @@ class App extends Component {
     for (var i = 1; i <= taskCount; i++) {
       const task = await todoList.methods.tasks(i).call()
 
+      this.setState({ tasks: [] })
       this.setState({
         tasks: [...this.state.tasks, task]
       })
       console.log('tasks', task)
-
     }
     this.setState({ loading: false })
 
@@ -57,36 +57,40 @@ class App extends Component {
     this.state.todoList.methods.createTask(name, content, phase, priority).send({ from: this.state.account })
       .once('receipt', (receipt) => {
         this.setState({ loading: false })
+        document.location.reload(true)
       })
   }
 
   toggleCompleted(taskId, completed) {
+    console.log('aaaaa', taskId, completed) //2 true
     this.setState({ loading: true })
     this.state.todoList.methods.toggleCompleted(taskId, completed).send({ from: this.state.account })
       .once('receipt', (receipt) => {
         this.setState({ loading: false })
+        document.location.reload(true)
       })
   }
 
   render() {
     return (
       <>
-        <div className="container-fluid">
-          <div className="row">
-            <p>Your account: {this.state.account}</p>
-            <p>Task Count: {this.state.taskCount}</p>
-            {/* <small><a href="#"><span id="account"></span></a></small> */}
-            <main role="main" className="col-lg-12 d-flex justify-content-center">
-              {this.state.loading
-                ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
-                : <TodoList
-                  tasks={this.state.tasks}
-                  createTask={this.createTask}
-                  toggleCompleted={this.toggleCompleted} />
-              }
-            </main>
+        <Container maxWidth="sm">
+          <div className="container-fluid" style={{ backgroundColor: 'blue' }}>
+            <div className="row">
+              <p>Your account: {this.state.account}</p>
+              <p>Task Count: {this.state.taskCount}</p>
+              <main role="main" className="col-lg-12 d-flex justify-content-center">
+                {this.state.loading
+                  ? <div id="loader" className="text-center"><p className="text-center">Process</p></div>
+                  : <TodoList
+                    tasks={this.state.tasks}
+                    createTask={this.createTask}
+                    toggleCompleted={this.toggleCompleted} />
+                }
+              </main>
+            </div>
           </div>
-        </div>
+        </Container>
       </>
     );
   }
