@@ -1,7 +1,6 @@
-export const TODO_LIST_ADDRESS = '0x05da8Fa1C299D8C0126368f0eC79fBAbb489DA8e'
+export const TODO_LIST_ADDRESS = '0xC0De0EA75121aa23cc50E925e392B44C7b4004E7'
 
 export const TODO_LIST_ABI = [
-
   {
     "inputs": [],
     "payable": false,
@@ -48,7 +47,7 @@ export const TODO_LIST_ABI = [
         "type": "bool"
       }
     ],
-    "name": "TaskCompleted",
+    "name": "TaskCreated",
     "type": "event"
   },
   {
@@ -62,27 +61,9 @@ export const TODO_LIST_ABI = [
       },
       {
         "indexed": false,
-        "internalType": "string",
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "content",
-        "type": "string"
-      },
-      {
-        "indexed": false,
         "internalType": "enum TodoList.TaskPhase",
         "name": "phase",
         "type": "uint8"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "priority",
-        "type": "uint256"
       },
       {
         "indexed": false,
@@ -91,7 +72,7 @@ export const TODO_LIST_ABI = [
         "type": "bool"
       }
     ],
-    "name": "TaskCreated",
+    "name": "ToggleCompleted",
     "type": "event"
   },
   {
@@ -190,28 +171,13 @@ export const TODO_LIST_ABI = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_id",
+        "name": "_taskId",
         "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "_name",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_content",
-        "type": "string"
       },
       {
         "internalType": "enum TodoList.TaskPhase",
         "name": "_phase",
         "type": "uint8"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_priority",
-        "type": "uint256"
       }
     ],
     "name": "toggleCompleted",
@@ -220,6 +186,4 @@ export const TODO_LIST_ABI = [
     "stateMutability": "nonpayable",
     "type": "function"
   }
-
 ]
-

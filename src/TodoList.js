@@ -7,7 +7,8 @@ class TodoList extends Component {
       <div id="content">
         <form onSubmit={(event) => {
           event.preventDefault()
-          this.props.createTask(this.task.value)
+          this.props.createTask(this.task.value, '', 0, 1)
+
         }}>
           <input
             id="newTask"
@@ -21,19 +22,23 @@ class TodoList extends Component {
           <input type="submit" hidden={true} />
         </form>
         <ul id="taskList" className="list-unstyled">{this.props.tasks.map((task, key) => {
-            return (
-              <div className="taskTemplate" className="checkbox" key={key}>
-                <label>
-                  <input type="checkbox" name={task.id }defaultChecked={task.completed}
-                    ref={(input) => {this.checkbox = input}}
-                    onClick={(event) => {this.props.toggleCompleted(this.checkbox.name)
-                    }} 
-                  />
-                  <span className="content">{task.content}</span>
-                </label>
-              </div>
-            )
-          })}
+          return (
+
+            <div className="taskTemplate" className="checkbox" key={key}>
+              <label>
+                <input type="checkbox" name={task.id} defaultChecked={task.completed}
+
+                  ref={(input) => { this.checkbox = input }}
+                  onClick={(event) => {
+                    this.props.toggleCompleted(this.checkbox.name, 1)
+                  }
+                }
+                />
+                <span className="content">{task.name}</span>
+              </label>
+            </div>
+          )
+        })}
         </ul>
         <ul id="completedTaskList" className="list-unstyled">
         </ul>
