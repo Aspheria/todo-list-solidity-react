@@ -33,6 +33,7 @@ const TodoList = (props) => {
   return (
 
     <div id="content">
+      
       <form onSubmit={(event) => {
         event.preventDefault()
         console.log(inputTask.current.value)
@@ -48,6 +49,8 @@ const TodoList = (props) => {
           required />
         <input type="submit" hidden={true} />
       </form>
+
+
       <ul id="taskList" className="list-unstyled">{tasks.map((task, value) => (
         <div className="taskTemplate" key={value}>
           <ListItem>

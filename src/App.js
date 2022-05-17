@@ -1,4 +1,4 @@
-import { Container } from '@mui/system'
+import { Card, CardActionArea, CardContent, Paper, Typography } from '@mui/material'
 import React, { Component } from 'react'
 import Web3 from 'web3'
 import './App.css'
@@ -74,23 +74,32 @@ class App extends Component {
   render() {
     return (
       <>
-        <Container maxWidth="sm">
-          <div className="container-fluid" style={{ backgroundColor: 'blue' }}>
-            <div className="row">
-              <p>Your account: {this.state.account}</p>
-              <p>Task Count: {this.state.taskCount}</p>
-              <main role="main" className="col-lg-12 d-flex justify-content-center">
-                {this.state.loading
-                  ? <div id="loader" className="text-center"><p className="text-center">Process</p></div>
-                  : <TodoList
-                    tasks={this.state.tasks}
-                    createTask={this.createTask}
-                    toggleCompleted={this.toggleCompleted} />
-                }
-              </main>
-            </div>
-          </div>
-        </Container>
+        <Card maxWidth="md">
+          <Paper elevation={3} >
+            <CardActionArea>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Todo List
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  <p>Your account: {this.state.account}</p>
+                  <p>Task Count: {this.state.taskCount}</p>
+                </Typography>
+
+                <main role="main">
+                  {this.state.loading
+                    ? <div id="loader" className="text-center"><p className="text-center">Process</p></div>
+                    : <TodoList
+                      tasks={this.state.tasks}
+                      createTask={this.createTask}
+                      toggleCompleted={this.toggleCompleted} />
+                  }
+                </main>
+              </CardContent>
+            </CardActionArea>
+          </Paper>
+
+        </Card>
       </>
     );
   }
