@@ -14,7 +14,6 @@ const TodoList = (props) => {
 
     props.toggleCompleted(Web3.utils.toBN(id).toString(), 1)
 
-
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -31,14 +30,11 @@ const TodoList = (props) => {
   }, [props])
 
   return (
-
     <div id="content">
-      
       <form onSubmit={(event) => {
         event.preventDefault()
         console.log(inputTask.current.value)
         props.createTask(inputTask.current.value.toString(), '', 0, 1)
-        
       }}>
         <input
           id="newTask"
@@ -49,7 +45,6 @@ const TodoList = (props) => {
           required />
         <input type="submit" hidden={true} />
       </form>
-
 
       <ul id="taskList" className="list-unstyled">{tasks.map((task, value) => (
         <div className="taskTemplate" key={value}>

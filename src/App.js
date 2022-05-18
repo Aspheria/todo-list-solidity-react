@@ -17,10 +17,8 @@ class App extends Component {
 
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
-    console.log(accounts[0], 'accounts')
 
     const todoList = new web3.eth.Contract(TODO_LIST_ABI, TODO_LIST_ADDRESS)
-    console.log(todoList, 'todoList')
 
     this.setState({ todoList })
     const taskCount = await todoList.methods.taskCount().call()
@@ -33,7 +31,6 @@ class App extends Component {
       this.setState({
         tasks: [...this.state.tasks, task]
       })
-      console.log('tasks', task)
     }
     this.setState({ loading: false })
 
@@ -62,7 +59,6 @@ class App extends Component {
   }
 
   toggleCompleted(taskId, completed) {
-    console.log('aaaaa', taskId, completed) //2 true
     this.setState({ loading: true })
     this.state.todoList.methods.toggleCompleted(taskId, completed).send({ from: this.state.account })
       .once('receipt', (receipt) => {
@@ -85,7 +81,6 @@ class App extends Component {
                   <p>Your account: {this.state.account}</p>
                   <p>Task Count: {this.state.taskCount}</p>
                 </Typography>
-
                 <main role="main">
                   {this.state.loading
                     ? <div id="loader" className="text-center"><p className="text-center">Process</p></div>
@@ -98,7 +93,6 @@ class App extends Component {
               </CardContent>
             </CardActionArea>
           </Paper>
-
         </Card>
       </>
     );
