@@ -2,9 +2,7 @@
   "name": "todolist",
   "version": "0.1.0",
   "private": true,
-    "engines": {
-    "node": "16.x"
-  },
+
   "dependencies": {
     "@craco/craco": "^6.4.3",
     "@emotion/react": "^11.9.0",
@@ -34,6 +32,9 @@
     "util": "^0.12.4",
     "web-vitals": "^2.1.4",
     "web3": "^1.7.3"
+  },
+  "engines": {
+    "node": "16.x"
   },
   "scripts": {
     "start": "react-scripts start",
